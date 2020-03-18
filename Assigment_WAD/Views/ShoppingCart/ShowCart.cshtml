@@ -1,0 +1,103 @@
+﻿@using System.Globalization
+@model Assigment_WAD.Models.ShoppingCart
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared_Project/Client/_LayoutClient.cshtml";
+}
+
+<!-- Page Banner Section Start -->
+<div class="page-banner-section section" style="background-image: url(/Assets/images/hero/hero-1.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="page-banner-content col">
+
+                <h1>Cart</h1>
+                <ul class="page-breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div><!-- Page Banner Section End -->
+<!-- Page Section Start -->
+<div class="page-section section mt-80 mt-lg-60 mt-md-60 mt-sm-60 mt-xs-40 mb-40 mb-lg-20 mb-md-20 mb-sm-20 mb-xs-0">
+    <div class="container">
+
+        <form action="@Url.Action("UpdateCart","ShoppingCart")" method="get">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cart-table table-responsive mb-40">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Image</th>
+                                    <th class="pro-title">Product</th>
+                                    <th class="pro-price">Price</th>
+                                    <th class="pro-quantity">Quantity</th>
+                                    <th class="pro-subtotal">Total</th>
+                                    <th class="pro-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.Items.Values)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="pro-thumbnail"><a href="#"><img src="@item.Picture" alt="" /></a></td>
+                                        <td class="pro-title"><a href="#">@item.title</a></td>
+                                        <td class="pro-price"><span class="amount">$@item.Price</span></td>
+                                        <td class="pro-quantity">
+                                            <input type="hidden" name="productID" value="@item.id" />
+                                            <input type="number" name="quantity" min="1" value="@item.Quantity">
+                                        </td>
+                                        <td class="pro-subtotal">$@item.TotalPrice</td>
+                                        <td class="pro-remove"><a href="@Url.Action("DeleteItem", "ShoppingCart", new {productID = item.id}, null)" onclick="return confirm('Do you sure delete this item ?')">×</a></td>
+                                    </tr>
+
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="cart-buttons mb-30">
+                        <input type="submit" value="Update Cart" />
+                        <a href="@Url.Action("Index","Client")">Continue Shopping</a>
+                    </div>
+                    <div class="cart-coupon mb-40">
+                        <h4>Coupon</h4>
+                        <p>Enter your coupon code if you have one.</p>
+                        <div class="cuppon-form">
+                            <input type="text" placeholder="Coupon code" />
+                            <input type="submit" value="Apply Coupon" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 col-12">
+                    <div class="cart-total fix mb-40">
+                        <h3>Cart Totals</h3>
+                        <table>
+                            <tbody>
+                                <tr class="cart-subtotal">
+                                    <th>Subtotal</th>
+                                    <td><span class="amount">@Model.CartTotal.ToString("C", CultureInfo.CurrentCulture)</span></td>
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Total</th>
+                                    <td>
+                                        <strong><span class="amount">@Model.CartTotal.ToString("C", CultureInfo.CurrentCulture)</span></strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="proceed-to-checkout section mt-30">
+                            <a href="@Url.Action("Checkout","Client")">Proceed to Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div><!-- Page Section End -->

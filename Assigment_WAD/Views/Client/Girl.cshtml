@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Assigment_WAD.Models.Product>
+
+@{
+    ViewBag.Title = "GirlKidPages";
+    Layout = "~/Views/Shared_Project/Client/_LayoutClient.cshtml";
+    string Price_Asc = "Price_Asc";
+    string Price_Desc = "Price_Desc";
+    string Title_Asc = "Title_Asc";
+    string Title_Desc = "Title_Desc";
+}
+
+<div class="page-banner-section section" style="background-image: url(/Assets/images/hero/hero-1.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="page-banner-content col">
+
+                <h1>Shop</h1>
+                <ul class="page-breadcrumb">
+                    <li><a href="@Url.Action("Index","Client")">Home</a></li>
+                    <li><a href="@Url.Action("Girl","Client")">Girl Pages</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div><!-- Page Banner Section End -->
+<!-- Page Section Start -->
+<div class="page-section section mt-80 mt-lg-60 mt-md-60 mt-sm-60 mt-xs-40 mb-80 mb-lg-60 mb-md-60 mb-sm-60 mb-xs-40">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+                <div class="col order-3 order-lg-2">
+                    <div class="main-menu">
+                        <nav>
+                            <ul>
+                                <li class="mt-2">
+                                    <a href="#" style="text-decoration: underline #94c7eb ; ">Order By <i class="fa fa-angle-down ml-10"></i></a>
+                                    <ul class="sub-menu">
+                                        <li> @Html.ActionLink("Price Ascending", "Girl", new { sortOrder = @Price_Asc })</li>
+                                        <li> @Html.ActionLink("Price Descending", "Girl", new { sortOrder = @Price_Desc })</li>
+                                        <li> @Html.ActionLink("Title Ascending", "Girl", new { sortOrder = @Title_Asc })</li>
+                                        <li> @Html.ActionLink("Title Descending", "Girl", new { sortOrder = @Title_Desc })</li>
+                                    </ul>
+                                </li>
+                                <li class="mt-35">
+                                    @using (Html.BeginForm("Girl", "Client", FormMethod.Get))
+                                    {
+                                        <p>
+                                            Category: @Html.DropDownList("categoryID", "All") <input type="submit" value="Tìm kiếm" />
+                                        </p>
+                                    }
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
+
+                    <div class="product-item">
+                        <div class="product-inner">
+
+                            <div class="image">
+                                <img src="@item.Picture" alt="">
+
+                                <div class="image-overlay">
+                                    <div class="action-buttons">
+                                        <button>
+                                            <a href="@Url.Action("AddItem", "ShoppingCart", new {productId = item.ProductID , quantity = 1}, null)">
+                                                <i class="fa fa-shopping-cart"> &nbsp; Add to cart</i>
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="content">
+
+                                <div class="content-left">
+
+                                    <h4 class="title"><a href="@Url.Action("SingleProduct","Client", new {id = item.ProductID})">@item.Title</a></h4>
+
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+
+                                    <h5 class="size">Size: <span>S</span><span>M</span><span>L</span><span>XL</span></h5>
+                                    <h5 class="color">Color: <span style="background-color: #ffb2b0"></span><span style="background-color: #0271bc"></span><span style="background-color: #efc87c"></span><span style="background-color: #00c183"></span></h5>
+
+                                </div>
+
+                                <div class="content-right">
+                                    <span class="price">$@item.Price</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+
+
+
+
+
+
+            <div class="col-12">
+                <ul class="page-pagination">
+                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>

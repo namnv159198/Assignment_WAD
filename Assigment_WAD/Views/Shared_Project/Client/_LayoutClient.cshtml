@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from demo.devitems.com/jadusona-v2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Dec 2018 09:36:26 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Jadusona - eCommerce Baby shop Bootstrap4 Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Assets/images/favicon.ico">
+
+    <!-- CSS
+    ============================================ -->
+    @Styles.Render("~/Assets/css")
+    @Scripts.Render("~/bundles/modernizrTemplate")
+</head>
+
+
+<body>
+
+<div class="main-wrapper">
+
+    @RenderPage("_Header.cshtml")
+
+    @RenderBody()
+    <!-- Brand Section End -->
+    @RenderPage("_Footer.cshtml")
+    <!-- Footer Bottom Section End -->
+
+</div>
+
+<!-- JS
+============================================ -->
+<!-- jQuery JS -->
+
+@Scripts.Render("~/bundles/jsTemplate")
+@RenderSection("scripts", required: false)
+</body>
+
+
+<!-- Mirrored from demo.devitems.com/jadusona-v2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Dec 2018 09:37:11 GMT -->
+</html>
