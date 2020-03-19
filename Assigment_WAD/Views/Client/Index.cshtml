@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Assigment_WAD.Models.Product>
+﻿@model PagedList.IPagedList<Assigment_WAD.Models.Product>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -113,7 +114,7 @@
                                     <div class="action-buttons">
                                         <button>
                                             <a href="@Url.Action("AddItem", "ShoppingCart", new {productId = item.ProductID , quantity = 1}, null)">
-                                                <i class="fa fa-shopping-cart" > &nbsp; Add to cart</i>
+                                                <i class="fa fa-shopping-cart"> &nbsp; Add to cart</i>
                                             </a>
                                         </button>
                                     </div>
@@ -151,11 +152,18 @@
 
                 </div>
             }
+            <br />
 
-
+            <div class="col-12">
+                <ul class="page-pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page, @class = "page-pagination" }))
+                </ul>
+            </div>
 
 
         </div>
+        
 
     </div>
 </div>

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Assigment_WAD.Data;
 using Assigment_WAD.Models;
+using PagedList;
 
 namespace ASSIGNMENT_WAD.Controllers
 {
@@ -17,11 +18,18 @@ namespace ASSIGNMENT_WAD.Controllers
         private Assigment_WADContext db = new Assigment_WADContext();
 
         // GET: Client
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var products = db.Products.Include(p => p.Category);
+            if (page == null) page = 1;
 
-            return View(products.ToList());
+            var products = (from l in db.Products
+                join c in db.Categories on l.CategoryID equals c.CategoryID
+                select l).OrderBy(p=>p.ProductID);
+
+               int pageSize = 3;
+
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber , pageSize));
         }
     
         public ActionResult Cart()

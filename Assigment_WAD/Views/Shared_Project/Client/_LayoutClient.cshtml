@@ -15,29 +15,34 @@
     <!-- CSS
     ============================================ -->
     @Styles.Render("~/Assets/css")
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizrTemplate")
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
 </head>
 
 
 <body>
 
-<div class="main-wrapper">
+    <div class="main-wrapper">
 
-    @RenderPage("_Header.cshtml")
+        @RenderPage("_Header.cshtml")
 
-    @RenderBody()
-    <!-- Brand Section End -->
-    @RenderPage("_Footer.cshtml")
-    <!-- Footer Bottom Section End -->
+        @RenderBody()
+        <!-- Brand Section End -->
+        @RenderPage("_Footer.cshtml")
+        <!-- Footer Bottom Section End -->
 
-</div>
+    </div>
 
-<!-- JS
-============================================ -->
-<!-- jQuery JS -->
+    <!-- JS
+    ============================================ -->
+    <!-- jQuery JS -->
 
 @Scripts.Render("~/bundles/jsTemplate")
-@RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+
 </body>
 
 

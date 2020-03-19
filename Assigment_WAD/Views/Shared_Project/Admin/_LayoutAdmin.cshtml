@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 03:57:06 GMT -->
+<head>
+    <title>:: Lucid HR :: Project Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+    <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    @Styles.Render("~/Asset_Admin/css")
+    @Styles.Render("~/Content/css")
+</head>
+<body class="theme-orange">
+
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img src="https://thememakker.com/templates/lucid/hr/html/assets/images/logo-icon.svg" width="48" height="48" alt="Lucid"></div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+
+    <div id="wrapper">
+
+        @RenderPage("_Navigation.cshtml")
+        @RenderPage("_LeftNavigation.cshtml")
+        @RenderBody()
+
+    </div>
+
+    <!-- Javascript -->
+    @Scripts.Render("~/bundles/jsAdminPages")
+@* @Scripts.Render("~/bundles/jquery") *@
+</body>
+
+<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Sep 2018 03:57:08 GMT -->
+</html>

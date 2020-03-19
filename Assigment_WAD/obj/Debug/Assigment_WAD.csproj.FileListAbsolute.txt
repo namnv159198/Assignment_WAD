@@ -104,4 +104,8 @@ C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\bin\Microsoft.CodeDom.Pr
 C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\obj\Debug\Assigment_WAD.csproj.CopyComplete
 C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\obj\Debug\Assigment_WAD.dll
 C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\obj\Debug\Assigment_WAD.pdb
+C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\bin\PagedList.dll
+C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\bin\PagedList.xml
+C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\bin\PagedList.Mvc.dll
+C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\bin\PagedList.Mvc.xml
 C:\Users\Admin\source\repos\Assigment_WAD\Assigment_WAD\obj\Debug\Assigment_WAD.csprojAssemblyReference.cache
