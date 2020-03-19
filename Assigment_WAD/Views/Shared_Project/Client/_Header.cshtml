@@ -80,15 +80,17 @@
                     <div class="header-search">
                         <button class="search-toggle"><img src="~/Assets/images/icons/search.png" alt="Search Toggle"><img class="toggle-close" src="~/Assets/images/icons/close.png" alt="Search Toggle"></button>
                         <div class="header-search-wrap">
-                            <form action="#">
-                                <input type="text" placeholder="Type and hit enter">
-                                <button><img src="~/Assets/images/icons/search.png" alt="Search"></button>
-                            </form>
+                            @using (Html.BeginForm("SearchTerm", "Client", FormMethod.Get))
+                            {
+                                <input type="text" placeholder="Type and hit enter" name="SearchTerm" value="@ViewBag.SearchTerm">
+                                <button type="submit"><img src="~/Assets/images/icons/search.png" alt="Search"></button>
+                            }
                         </div>
                     </div>
 
                     <div class="header-mini-cart">
-                        <a href="@Url.Action("ShowCart","ShoppingCart")"><img src="~/Assets/images/icons/cart.png" alt="Cart"> 
+                        <a href="@Url.Action("ShowCart","ShoppingCart")">
+                            <img src="~/Assets/images/icons/cart.png" alt="Cart">
 
                             <span></span>
                         </a>

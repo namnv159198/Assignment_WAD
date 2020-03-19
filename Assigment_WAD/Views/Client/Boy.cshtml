@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Assigment_WAD.Models.Product>
+﻿
+@* @model PagedList.IPagedList<Assigment_WAD.Models.Product> *@
+@model IEnumerable<Assigment_WAD.Models.Product>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "BoyKidPages";
     Layout = "~/Views/Shared_Project/Client/_LayoutClient.cshtml";
@@ -35,7 +38,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="mt-2">
+                                <li style="margin-top: -30px" class="">
                                     <a href="#" style="text-decoration: underline #94c7eb ; ">Order By <i class="fa fa-angle-down ml-10"></i></a>
                                     <ul class="sub-menu">
                                         <li> @Html.ActionLink("Price Ascending", "Boy", new { sortOrder = @Price_Asc })</li>
@@ -44,89 +47,89 @@
                                         <li> @Html.ActionLink("Title Descending", "Boy", new { sortOrder = @Title_Desc })</li>
                                     </ul>
                                 </li>
-                                <li class="mt-35">
-                                    @using (Html.BeginForm("Boy", "Client", FormMethod.Get))
-                                    {
+                                <li class="ml-100" style="font-size: 16px; line-height: 35px;text-transform: uppercase; color: #1a161e"> CATEGORY:</li>
+                                @using (Html.BeginForm("Boy", "Client", FormMethod.Get))
+                                {
+
+                                    <li class="mt-10">
                                         <p>
-                                           Category: @Html.DropDownList("categoryID", "All") <input type="submit" value="Tìm kiếm" />
+                                            @Html.DropDownList("categoryID", null, "All", new { @class = "form-control", @style = "font-size:16px;float: left;height: 35px" })
                                         </p>
-                                    }
-                                </li>
+
+                                    </li>
+                                    <li>  <input class="form-control btn-outline-primary ml-20" type="submit" value="Tìm kiếm" style="float: left; width: 100px;" /></li>
+                                }
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
-          
-                @foreach (var item in Model)
-                {
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
 
-                        <div class="product-item">
-                            <div class="product-inner">
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40 mt-100">
 
-                                <div class="image">
-                                    <img src="@item.Picture" alt="">
+                    <div class="product-item">
+                        <div class="product-inner">
 
-                                    <div class="image-overlay">
-                                        <div class="action-buttons">
-                                            <button>
-                                                <a href="@Url.Action("AddItem", "ShoppingCart", new {productId = item.ProductID , quantity = 1}, null)">
-                                                    <i class="fa fa-shopping-cart"> &nbsp; Add to cart</i>
-                                                </a>
-                                            </button>
-                                        </div>
+                            <div class="image">
+                                <img src="@item.Picture" alt="">
+
+                                <div class="image-overlay">
+                                    <div class="action-buttons">
+                                        <button>
+                                            <a href="@Url.Action("AddItem", "ShoppingCart", new {productId = item.ProductID , quantity = 1}, null)">
+                                                <i class="fa fa-shopping-cart"> &nbsp; Add to cart</i>
+                                            </a>
+                                        </button>
                                     </div>
-
-                                </div>
-
-                                <div class="content">
-
-                                    <div class="content-left">
-
-                                        <h4 class="title"><a href="@Url.Action("SingleProduct","Client", new {id = item.ProductID})">@item.Title</a></h4>
-
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-
-                                        <h5 class="size">Size: <span>S</span><span>M</span><span>L</span><span>XL</span></h5>
-                                        <h5 class="color">Color: <span style="background-color: #ffb2b0"></span><span style="background-color: #0271bc"></span><span style="background-color: #efc87c"></span><span style="background-color: #00c183"></span></h5>
-
-                                    </div>
-
-                                    <div class="content-right">
-                                        <span class="price">$@item.Price</span>
-                                    </div>
-
                                 </div>
 
                             </div>
-                        </div>
 
+                            <div class="content">
+
+                                <div class="content-left">
+
+                                    <h4 class="title"><a href="@Url.Action("SingleProduct","Client", new {id = item.ProductID})">@item.Title</a></h4>
+
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+
+                                    <h5 class="size">Size: <span>S</span><span>M</span><span>L</span><span>XL</span></h5>
+                                    <h5 class="color">Color: <span style="background-color: #ffb2b0"></span><span style="background-color: #0271bc"></span><span style="background-color: #efc87c"></span><span style="background-color: #00c183"></span></h5>
+
+                                </div>
+
+                                <div class="content-right">
+                                    <span class="price">$@item.Price</span>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
-                }
+                </div>
+
+            }
 
 
 
 
 
 
-                <div class="col-12">
-                <ul class="page-pagination">
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
-            </div>
+@*             <div class="col-12"> *@
+@*                 <ul class="page-pagination"> *@
+@*                     @Html.PagedListPager(Model, page => Url.Action("PageListBoy", *@
+@*                         new { page, @class = "page-pagination" })) *@
+@*                 </ul> *@
+@*             </div> *@
 
         </div>
 

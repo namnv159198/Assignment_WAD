@@ -26,12 +26,14 @@ namespace ASSIGNMENT_WAD.Controllers
                 join c in db.Categories on l.CategoryID equals c.CategoryID
                 select l).OrderBy(p=>p.ProductID);
 
-               int pageSize = 3;
+               int pageSize = 12;
 
             int pageNumber = (page ?? 1);
+            
             return View(products.ToPagedList(pageNumber , pageSize));
         }
-    
+        
+
         public ActionResult Cart()
         {
             return RedirectToAction("ShowCart","ShoppingCart");
@@ -56,11 +58,13 @@ namespace ASSIGNMENT_WAD.Controllers
            
 
             var products = db.Products.Include(p => p.Category);
+
             if (categoryID != 0)
             {
                 products = products.Where(x => x.CategoryID == categoryID);
             }
             var ListProduct = new List<Product>();
+
             foreach (var i in products)
             {
                 if (i.Gender == Product.EnumGender.Boy || i.Gender == Product.EnumGender.All)
@@ -85,8 +89,10 @@ namespace ASSIGNMENT_WAD.Controllers
                     break;
             }
 
-            return View(ListProduct.ToList());
+            return View("Boy",ListProduct.ToList());
         }
+
+     
         public ActionResult Girl(string sortOrder, int categoryID = 0)
         {
             var categories = from c in db.Categories select c;
@@ -137,32 +143,54 @@ namespace ASSIGNMENT_WAD.Controllers
         {
             return View("Login_Register");
         }
+
         public ActionResult Shop()
         {
+
             return View("Shop");
         }
+        public ActionResult SearchTerm(String searchTerm)
+        {
+
+            var products = db.Products.Include(p => p.Category);
+            if (searchTerm != null)
+            {
+                products = products.Where(p => p.Title.Contains(searchTerm));
+            }
+            switch (searchTerm)
+            {
+                case "Price_Asc":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+            }
+            ViewBag.SearchTerm = searchTerm;
+            return View("Shop", products.ToList());
+        }
+
         public ActionResult Contact()
         {
             return View("Contact");
         }
 
-        public ActionResult SortPrice(String sort)
+        public ActionResult PageListBoy(int? page)
         {
-            var products = db.Products.Include(s => s.CategoryID);
-            switch (sort)
+            if (page == null) page = 1;
+
+            var products = (from l in db.Products
+                join c in db.Categories on l.CategoryID equals c.CategoryID
+                select l).OrderBy(p => p.ProductID);
+
+            int pageSize = 8;
+            var ListProduct = new List<Product>();
+            int pageNumber = (page ?? 1);
+            foreach (var i in products)
             {
-                // 3.1 Nếu biến sortOrder sắp giảm thì sắp giảm theo LinkName
-                case "Asc":
-                    products = db.Products.OrderByDescending(s => s.Price);
-                    break;
-
-                // 3.2 Mặc định thì sẽ sắp tăng
-                default:
-                    products = db.Products.OrderBy(s => s.Price);
-                    break;
+                if (i.Gender == Product.EnumGender.Boy || i.Gender == Product.EnumGender.All)
+                {
+                    ListProduct.Add(i);
+                }
             }
-
-            return View("Boy",products);
+            return RedirectToAction("Boy",ListProduct.ToPagedList(pageNumber, pageSize));
         }
     }
 }

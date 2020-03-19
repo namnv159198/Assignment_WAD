@@ -35,7 +35,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="mt-2">
+                                <li style="margin-top: -30px" class="">
                                     <a href="#" style="text-decoration: underline #94c7eb ; ">Order By <i class="fa fa-angle-down ml-10"></i></a>
                                     <ul class="sub-menu">
                                         <li> @Html.ActionLink("Price Ascending", "Girl", new { sortOrder = @Price_Asc })</li>
@@ -44,14 +44,18 @@
                                         <li> @Html.ActionLink("Title Descending", "Girl", new { sortOrder = @Title_Desc })</li>
                                     </ul>
                                 </li>
-                                <li class="mt-35">
-                                    @using (Html.BeginForm("Girl", "Client", FormMethod.Get))
-                                    {
+                                <li class="ml-100" style="font-size: 16px; line-height: 35px;text-transform: uppercase; color: #1a161e"> CATEGORY:</li>
+                                @using (Html.BeginForm("Girl", "Client", FormMethod.Get))
+                                {
+
+                                    <li class="mt-10">
                                         <p>
-                                            Category: @Html.DropDownList("categoryID", "All") <input type="submit" value="Tìm kiếm" />
+                                            @Html.DropDownList("categoryID", null, "All", new { @class = "form-control", @style = "font-size:16px;float: left;height: 35px" })
                                         </p>
-                                    }
-                                </li>
+
+                                    </li>
+                                    <li>  <input class="form-control btn-outline-primary ml-20" type="submit" value="Tìm kiếm" style="float: left; width: 100px;" /></li>
+                                }
                             </ul>
                         </nav>
                     </div>
@@ -60,7 +64,7 @@
 
             @foreach (var item in Model)
             {
-                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-40">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-50 mt-100">
 
                     <div class="product-item">
                         <div class="product-inner">
